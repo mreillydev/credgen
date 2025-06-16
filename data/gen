@@ -28,8 +28,10 @@
 
 set -e -v
 
-cp common-unix.txt credgen_words.txt
+cp unix/common.txt credgen_words.txt
+#tr '[:upper:]' '[:lower:]' <unix/common.txt >credgen_words.txt
 
+#sed -i -e '/[1234567890]/d' credgen_words.txt
 sed -i -e '/`/d' credgen_words.txt
 sed -i -e '/~/d' credgen_words.txt
 sed -i -e '/!/d' credgen_words.txt
@@ -66,9 +68,7 @@ sed -i -e '/ /d' credgen_words.txt
 
 Output="../src/credgen_words.h"
 
-rm -f $Output
-echo "// Data dervied from Public Domain Moby Project" >> $Output
-echo "// https://gutenberg.org/files/3201/files/COMMON.TXT" >> $Output
+cat sources > $Output
 
 xxd -i credgen_words.txt >> $Output
 
