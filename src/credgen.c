@@ -40,6 +40,8 @@
 #define MAX_NORMAL 30
 #define MIN_EASY    8
 #define MAX_EASY   12
+#define MIN_WORDS   8
+#define MAX_WORDS  14
 #define DLM_NORMAL " "
 #define DLN_NORMAL  5
 
@@ -55,7 +57,7 @@ char const Usage[] =
 "    -v        Print version string.\n"
 "    -[aA1sS]  Choose keyset from a-z, A-Z, 0-9, and lower/upper symbols.\n"
 "    -e        Easy mode. Same as '-aaaA1 %d %d'.\n"
-"    -w        Generate strings of English words (last word may exceed max).\n"
+"    -w        Generate strings of English words (default %d to %d words).\n"
 "    -d[=dlm]  Delimit characters (or words if -w) with spaces (or dlm).\n"
 "    -dn=n     Change delimiter frequency from %d (not if -w).\n"
 "    len, min, and max allow changing range of possible password lengths.\n";
@@ -113,7 +115,7 @@ int main(int argc, char **argv)
         if(strcmp(argv[1], "-h") == 0)
         {
             printf(Usage, MIN_NORMAL, MAX_NORMAL, strlen(Qwerty), MIN_EASY,
-                   MAX_EASY, DLN_NORMAL);
+                   MAX_EASY, MIN_WORDS, MAX_WORDS, DLN_NORMAL);
             goto end;
         }
         // -v version string
@@ -125,6 +127,8 @@ int main(int argc, char **argv)
         // -w embedded words dictionary
         else if(strcmp(argv[1], "-w") == 0)
         {
+            min_default = MIN_WORDS;
+            max_default = MAX_WORDS;
             wordspace = UINT_MAX;
             nthword(&wordspace);
         }
@@ -267,7 +271,7 @@ int main(int argc, char **argv)
             if( ! tmp)
                 goto internal_error;
             printf("%s%s", ((dlm && pd) ? dlm : ""), tmp);
-            pd += strlen(tmp);
+            pd++;
         }
     }
     printf("\n");
