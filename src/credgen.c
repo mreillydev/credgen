@@ -53,13 +53,14 @@ char const Usage[] =
 "    Pseudorandomly generate password credentials. By default, a credential of\n"
 "    %d to %d character length from the %zu character Qwerty keyset is generated.\n"
 "Options:\n"
-"    -h        Print usage text.\n"
-"    -v        Print version string.\n"
-"    -[aA1sS]  Choose keyset from a-z, A-Z, 0-9, and lower/upper symbols.\n"
-"    -e        Easy mode. Same as '-aaaA1 %d %d'.\n"
-"    -w        Generate strings of English words (default %d to %d words).\n"
-"    -d[=dlm]  Delimit characters (or words if -w) with spaces (or dlm).\n"
-"    -dn=n     Change delimiter frequency from %d (not if -w).\n"
+"    -h          Print usage text.\n"
+"    -v          Print version string.\n"
+"    -[aA1sS]    Choose keyset from a-z, A-Z, 0-9, and lower/upper symbols.\n"
+"    -e          Easy mode. Same as '-aaaA1 %d %d'.\n"
+"    -w          Generate strings of English words (default %d to %d words).\n"
+"    -wordcount  Size of embedded words dictionary (for complexity calculations).\n"
+"    -d[=dlm]    Delimit characters (or words if -w) with spaces (or dlm).\n"
+"    -dn=n       Change delimiter frequency from %d (not if -w).\n"
 "    len, min, and max allow changing range of possible password lengths.\n";
 
 // Buffer for character set available to be used during generation
@@ -122,6 +123,14 @@ int main(int argc, char **argv)
         else if(strcmp(argv[1], "-v") == 0)
         {
             printf("%s\n", BUILD_DATE);
+            goto end;
+        }
+        // -wordcount size of dictionary
+        else if(strcmp(argv[1], "-wordcount") == 0)
+        {
+            wordspace = UINT_MAX;
+            nthword(&wordspace);
+            printf("%d\n", wordspace);
             goto end;
         }
         // -w embedded words dictionary
