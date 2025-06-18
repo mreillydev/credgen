@@ -55,7 +55,7 @@ char const Usage[] =
 "    -v        Print version string.\n"
 "    -[aA1sS]  Choose keyset from a-z, A-Z, 0-9, and lower/upper symbols.\n"
 "    -e        Easy mode. Same as '-aaaA1 %d %d'.\n"
-"    -w        Generate strings of common words (last word may exceed max).\n"
+"    -w        Generate strings of English words (last word may exceed max).\n"
 "    -d[=dlm]  Delimit characters (or words if -w) with spaces (or dlm).\n"
 "    -dn=n     Change delimiter frequency from %d (not if -w).\n"
 "    len, min, and max allow changing range of possible password lengths.\n";

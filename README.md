@@ -2,8 +2,8 @@
 
 credgen is a lightweight password generator written in C for Linux and BSD
 using OpenBSD's arc4random library. In addition to keyset filtering and output
-formatting options, it contains an embedded dictionary of common English words
-as a generation option.
+formatting options, it contains an embedded dictionary of English words as a
+generation option.
 
 This software is tested on 64 bit Debian and FreeBSD.
 
