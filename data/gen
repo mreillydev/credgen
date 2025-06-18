@@ -28,9 +28,9 @@
 
 set -e -v
 
-# Remove acronyms and all-uppercase lines
+# Remove acronyms, all-uppercase words, and words with 3 or fewer letters
 comm -23 unix/common.txt unix/acronyms.txt > credgen_words.tmp2
-grep -v -E '\b[[:upper:]]+\b' credgen_words.tmp2 > credgen_words.tmp
+grep -v -E '\b[[:upper:]]+\b' credgen_words.tmp2 | grep '....' > credgen_words.tmp
 
 # Remove lines with numbers and symbols
 sed -i -e '/[1234567890]/d' credgen_words.tmp
