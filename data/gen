@@ -28,43 +28,55 @@
 
 set -e -v
 
-cp unix/common.txt credgen_words.txt
+# Remove acronyms and all uppercase lines
+comm -23 unix/common.txt unix/acronyms.txt > credgen_words.tmp2
+grep -v -E '\b[[:upper:]]+\b' credgen_words.tmp2 > credgen_words.tmp
+
+# Remove lines with numbers and symbols
+sed -i -e '/[1234567890]/d' credgen_words.tmp
+sed -i -e '/`/d' credgen_words.tmp
+sed -i -e '/~/d' credgen_words.tmp
+sed -i -e '/!/d' credgen_words.tmp
+sed -i -e '/@/d' credgen_words.tmp
+sed -i -e '/#/d' credgen_words.tmp
+sed -i -e '/\$/d' credgen_words.tmp
+sed -i -e '/%/d' credgen_words.tmp
+sed -i -e '/\^/d' credgen_words.tmp
+sed -i -e '/\&/d' credgen_words.tmp
+sed -i -e '/\*/d' credgen_words.tmp
+sed -i -e '/(/d' credgen_words.tmp
+sed -i -e '/)/d' credgen_words.tmp
+sed -i -e '/-/d' credgen_words.tmp
+sed -i -e '/_/d' credgen_words.tmp
+sed -i -e '/=/d' credgen_words.tmp
+sed -i -e '/+/d' credgen_words.tmp
+sed -i -e '/\[/d' credgen_words.tmp
+sed -i -e '/{/d' credgen_words.tmp
+sed -i -e '/\]/d' credgen_words.tmp
+sed -i -e '/}/d' credgen_words.tmp
+sed -i -e '/\\/d' credgen_words.tmp
+sed -i -e '/|/d' credgen_words.tmp
+sed -i -e '/;/d' credgen_words.tmp
+sed -i -e '/:/d' credgen_words.tmp
+sed -i -e "/'/d" credgen_words.tmp
+sed -i -e '/"/d' credgen_words.tmp
+sed -i -e '/,/d' credgen_words.tmp
+sed -i -e '/</d' credgen_words.tmp
+sed -i -e '/\./d' credgen_words.tmp
+sed -i -e '/>/d' credgen_words.tmp
+sed -i -e '/\//d' credgen_words.tmp
+sed -i -e '/?/d' credgen_words.tmp
+sed -i -e '/ /d' credgen_words.tmp
+
+sort credgen_words.tmp > credgen_words.txt
+
+rm credgen_words.tmp
+rm credgen_words.tmp2
+
+# Remove acronyms
+#grep -v -x -F unix/acronyms.txt unix/common.txt credgen_words.txt
 #tr '[:upper:]' '[:lower:]' <unix/common.txt >credgen_words.txt
 
-#sed -i -e '/[1234567890]/d' credgen_words.txt
-sed -i -e '/`/d' credgen_words.txt
-sed -i -e '/~/d' credgen_words.txt
-sed -i -e '/!/d' credgen_words.txt
-sed -i -e '/@/d' credgen_words.txt
-sed -i -e '/#/d' credgen_words.txt
-sed -i -e '/\$/d' credgen_words.txt
-sed -i -e '/%/d' credgen_words.txt
-sed -i -e '/\^/d' credgen_words.txt
-sed -i -e '/\&/d' credgen_words.txt
-sed -i -e '/\*/d' credgen_words.txt
-sed -i -e '/(/d' credgen_words.txt
-sed -i -e '/)/d' credgen_words.txt
-sed -i -e '/-/d' credgen_words.txt
-sed -i -e '/_/d' credgen_words.txt
-sed -i -e '/=/d' credgen_words.txt
-sed -i -e '/+/d' credgen_words.txt
-sed -i -e '/\[/d' credgen_words.txt
-sed -i -e '/{/d' credgen_words.txt
-sed -i -e '/\]/d' credgen_words.txt
-sed -i -e '/}/d' credgen_words.txt
-sed -i -e '/\\/d' credgen_words.txt
-sed -i -e '/|/d' credgen_words.txt
-sed -i -e '/;/d' credgen_words.txt
-sed -i -e '/:/d' credgen_words.txt
-sed -i -e "/'/d" credgen_words.txt
-sed -i -e '/"/d' credgen_words.txt
-sed -i -e '/,/d' credgen_words.txt
-sed -i -e '/</d' credgen_words.txt
-sed -i -e '/\./d' credgen_words.txt
-sed -i -e '/>/d' credgen_words.txt
-sed -i -e '/\//d' credgen_words.txt
-sed -i -e '/?/d' credgen_words.txt
-sed -i -e '/ /d' credgen_words.txt
 
 Output="../src/credgen_words.h"
 

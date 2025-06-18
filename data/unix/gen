@@ -28,8 +28,8 @@
 
 set -e -v
 
-cp ../moby/COMMON.TXT common.txt
-cp ../moby/ACRONYMS.TXT acronyms.txt
+sort ../moby/COMMON.TXT > common.txt
+sort ../moby/ACRONYMS.TXT > acronyms.txt
 
 dos2unix common.txt
 dos2unix acronyms.txt
