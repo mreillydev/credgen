@@ -28,7 +28,7 @@
 
 set -e -v
 
-# Remove acronyms and all uppercase lines
+# Remove acronyms and all-uppercase lines
 comm -23 unix/common.txt unix/acronyms.txt > credgen_words.tmp2
 grep -v -E '\b[[:upper:]]+\b' credgen_words.tmp2 > credgen_words.tmp
 
@@ -68,25 +68,23 @@ sed -i -e '/\//d' credgen_words.tmp
 sed -i -e '/?/d' credgen_words.tmp
 sed -i -e '/ /d' credgen_words.tmp
 
-sort credgen_words.tmp > credgen_words.txt
+# Lowercase everything
+tr '[:upper:]' '[:lower:]' <credgen_words.tmp | sort | uniq >credgen_words.txt
 
+# Remove tmpfiles
 rm credgen_words.tmp
 rm credgen_words.tmp2
 
-# Remove acronyms
-#grep -v -x -F unix/acronyms.txt unix/common.txt credgen_words.txt
-#tr '[:upper:]' '[:lower:]' <unix/common.txt >credgen_words.txt
-
-
+# Add data to header
 Output="../src/credgen_words.h"
-
 cat sources > $Output
-
 xxd -i credgen_words.txt >> $Output
 
+# Format header and add NUL delimiters
 sed -i -e "/unsigned int/d" $Output
 sed -i -e "s/unsigned char/const char/g" $Output
 sed -i -e "s/0x0a$/0x00, 0x00/g" $Output
 sed -i -e "s/0x0a/0x00/g" $Output
 
+# Done
 printf "Words file generation completed\n\n"
