@@ -5,7 +5,11 @@ using OpenBSD's arc4random library. In addition to keyset filtering and output
 formatting options, it contains an embedded dictionary of English words as a
 generation option.
 
+# Platforms
+
 This software is tested on 64 bit Debian and FreeBSD.
+
+# Usage
 
 usage: credgen [options] [ len | min max ]  
 &emsp;Pseudorandomly generate password credentials. By default, a credential of  
