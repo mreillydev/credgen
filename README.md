@@ -24,3 +24,7 @@ Options:
 &emsp;-d[=dlm]    Delimit characters (or words if -w) with spaces (or dlm).  
 &emsp;-dn=n       Change delimiter frequency from 5 (not if -w).  
 &emsp;len, min, and max allow changing range of possible password lengths.  
+
+# License
+
+Licensed under the BSD-3 License.
