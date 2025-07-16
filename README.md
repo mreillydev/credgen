@@ -72,3 +72,7 @@ $ credgen -wordcount
 # License
 
 Licensed under the BSD-3 License.
+
+# Author
+
+This software was created by Michael Reilly (mreilly@mreilly.dev)
