@@ -31,7 +31,7 @@ SRCDIR = $(TOPDIR)/src
 BINDIR = $(TOPDIR)/bin
 DATDIR = $(TOPDIR)/data
 EXEC = $(BINDIR)/credgen
-CC = clang
+CC ?= clang
 CFLAGS = -Wall
 
 clean: clear all
